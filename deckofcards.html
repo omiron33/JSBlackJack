@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+    class Deck {
+        constructor() {
+
+            this.deck = [
+            "c1","c2",'c3','c4','c5','c6','c7','c8','c9','c10','cj','cq','ck','h1','h2','h3','h4','h5','h6','h7','h8','h9','h1','hj','hq','hk','d1','d2','d3','d4','d5','d6','d7','d8','d9','d10','dj','dq','dk','s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','sj','sq','sk'
+            ]
+        }
+        shuffle() {
+            
+            var m = this.deck.length, t, i;
+
+            // While there remain elements to shuffle…
+            while (m) {
+
+                // Pick a remaining element…
+                i = Math.floor(Math.random() * m--);
+
+                // And swap it with the current element.
+                t = this.deck[m];
+                this.deck[m] = this.deck[i];
+                this.deck[i] = t;
+            }
+
+            return this.deck;
+        }
+        
+        deal() {
+            return this.deck.shift()
+        }
+        reset() {
+            this.deck = [
+                "c1", "c2", 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'cj', 'cq', 'ck', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8', 'h9', 'h1', 'hj', 'hq', 'hk', 'd1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10', 'dj', 'dq', 'dk', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 'sj', 'sq', 'sk'
+            ];
+            this.shuffle();
+            
+        }
+    }
+    class Player {
+        constructor(name) {
+            this.name = name
+            this.hand = []
+        }
+        take(deck) {
+            this.hand.push(deck.deal());
+            return this;
+        }
+        discard(card) {
+            this.hand.splice(card, 1);
+        }
+    
+    }
+    
+    var deck1 = new Deck()
+    var john = new Player('John')
+    deck1.shuffle();
+    deck1.reset();
+    john.take(deck1).take(deck1).take(deck1).take(deck1).take(deck1)
+    console.log(john.hand)
+    john.discard(2);
+    console.log(john.hand)
+
+   
+    </script>
+</body>
+</html>
+
+<!-- this.deck = { 1 : "CA", 2 : "C2", 3 : "C3", 4 : "C4", 5 : "C5", 6 : "C6", 7 : "C7", 8 : "C8", 9 : "C9", 10 : "C10", 11 :
+"CJ", 12 : "CQ", 13 : "CK", 14 : "SA", 15 : "SK", 16 : "D2", 17 : "D3", 18 : "D4", 19 : "D5", 20 : "D6", 21 : "D7", 22 :
+"D8", 23 : "D9", 24 : "D10", 25 : "DJ", 26 : "DQ", 27 : "DK", 28 : "DA", 29 : "SQ", 30 : "H2", 31 : "H3", 32 : "H4", 33 :
+"H5", 34 : "H6", 35 : "H7", 36 : "H8", 37 : "H9", 38 : "H10", 39 : "HJ", 40 : "HQ", 41 : "HK", 42 : "HA", 43 : "SJ", 44 :
+"S2", 45 : "S3", 46 : "S4", 47 : "S5", 48 : "S6", 49 : "S7", 50 : "S8", 51 : "S9", 52 : "S10" } -->
